@@ -1,7 +1,10 @@
 package com.company.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,30 +15,33 @@ import javax.annotation.security.RolesAllowed;
  * 测试接口
  */
 @RestController
-@RequestMapping("/api")
-public class TestController {
+@RequestMapping("/authenticated")
+@Api("测试用户权限")
+public class AuthenticatedController {
 
+    @ApiOperation(value = "@RolesAllowed注解测试", notes = "实现的getAuthoritie里面的role都必须要有ROLE_前缀")
     @RolesAllowed({"MEMBER", "ROLE_MEMBER"})
-    @RequestMapping("/roleAllowed/member")
+    @GetMapping("/roleAllowed/member")
     public String roleMemberRolesAllowed() {
         return "success";
     }
 
+    @ApiOperation(value = "@RolesAllowed注解测试", notes = "实现的getAuthoritie里面的role都必须要有ROLE_前缀")
     @RolesAllowed({"ADMIN", "ROLE_ADMIN"})
-    @RequestMapping("/roleAllowed/admin")
+    @GetMapping("/roleAllowed/admin")
     public String roleAdminRolesAllowed() {
         return "success";
     }
 
     @Secured({"MEMBER", "ROLE_MEMBER"})
-    @RequestMapping("/secured/member")
+    @GetMapping("/secured/member")
     public String roleMember() {
         return "success";
     }
 
 
     @Secured({"ADMIN", "ROLE_ADMIN"})
-    @RequestMapping("/secured/admin")
+    @GetMapping("/secured/admin")
     public String roleAdmin() {
         return "success";
     }
@@ -47,7 +53,7 @@ public class TestController {
      * @return
      */
     @PreAuthorize("@webSecurity.checkUserId(authentication,#username)")
-    @RequestMapping("/scope/read/{username}")
+    @GetMapping("/scope/read/{username}")
     public String read(@PathVariable String username) {
         return "success";
     }
@@ -57,7 +63,7 @@ public class TestController {
      * @return
      */
     @PreAuthorize("#oauth2.hasScope('write')")
-    @RequestMapping("/scope/write")
+    @GetMapping("/scope/write")
     public String write() {
         return "success";
     }
@@ -67,7 +73,7 @@ public class TestController {
      * @return
      */
     @PreAuthorize("#oauth2.clientHasAnyRole('MEMBER')")
-    @RequestMapping("/authorities/member")
+    @GetMapping("/authorities/member")
     public String member() {
         return "success";
     }
@@ -76,7 +82,7 @@ public class TestController {
      * @return
      */
     @PreAuthorize("#oauth2.clientHasAnyRole('ADMIN')")
-    @RequestMapping("/authorities/admin")
+    @GetMapping("/authorities/admin")
     public String admin() {
         return "success";
     }

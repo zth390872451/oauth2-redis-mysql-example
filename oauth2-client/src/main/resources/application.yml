@@ -1,0 +1,20 @@
+security:
+    basic:
+        enabled: false # 是否开启基本的鉴权，默认为true。 true：所有的接口默认都需要被验证，将导致 拦截器[对于 excludePathPatterns()方法失效]
+server:
+  port: 8052
+---
+spring:
+  application:
+      name: oauth2-client
+  profiles:
+    active: dev
+
+token:
+  obtain:
+    url: http://localhost:8050/oauth/token #oauth2-server 服务器地址 + oauth/token
+
+swagger2:
+  base-package: com.company.controller
+  api-title: 接口测试
+  version: 0.1.0

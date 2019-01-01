@@ -2,12 +2,11 @@ security:
     basic:
         enabled: false # 是否开启基本的鉴权，默认为true。 true：所有的接口默认都需要被验证，将导致 拦截器[对于 excludePathPatterns()方法失效]
 server:
-  context-path: /oauth2-client
   port: 8051
 ---
 spring:
   application:
-      name: oauth2-client
+      name: oauth2-resource
   datasource: #数据源的配置
     url: jdbc:mysql://127.0.0.1:3306/test
     username: root
@@ -29,3 +28,14 @@ spring:
           max-wait: 8
           min-idle: 0
           max-idle: 8
+  profiles:
+    active: dev
+
+oauth2:
+  resource:
+    id: oauth2-resource
+
+swagger2:
+  base-package: com.company.controller
+  api-title: 接口测试
+  version: 0.1.0

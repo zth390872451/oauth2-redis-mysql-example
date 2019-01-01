@@ -13,9 +13,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableWebMvc
 @SpringBootApplication
 @EnableWebSecurity
-@EnableResourceServer
 @EnableGlobalMethodSecurity(prePostEnabled = true,jsr250Enabled = true,securedEnabled = true) //启用方法验证
-//@EnableOAuth2Client //创建Oauth2的资源服务器——client，并开启资源服务器的相关默认配置
 public class Oauth2ResourceApplication {
     public static void main(String[] args) {
         SpringApplication.run(Oauth2ResourceApplication.class, args);

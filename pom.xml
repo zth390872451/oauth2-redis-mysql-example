@@ -10,6 +10,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>oauth2-resource</module>
+        <module>oauth2-client</module>
         <module>oauth2-server</module>
         <module>oauth-common-http</module>
     </modules>
@@ -20,12 +21,27 @@
         <version>1.4.0.RELEASE</version>
     </parent>
 
+
+    <properties>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <swagger2.version>2.7.0</swagger2.version>
+        <velocity.engine.version>2.0</velocity.engine.version>
+    </properties>
+
     <dependencies>
 
+
+
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.27</version>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger2.version}</version>
         </dependency>
 
     </dependencies>

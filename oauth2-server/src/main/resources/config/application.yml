@@ -1,0 +1,32 @@
+security:
+    basic:
+        enabled: false # 是否开启基本的鉴权，默认为true。 true：所有的接口默认都需要被验证，将导致 拦截器[对于 excludePathPatterns()方法失效]
+server:
+  context-path: /oauth2-server
+  port: 8050
+---
+spring:
+  application:
+      name: oauth2-server
+  redis:
+      database: 5
+      host: 127.0.0.1
+      port: 6379
+      pool:
+          max-active: 8
+          max-wait: 8
+          min-idle: 0
+          max-idle: 8
+
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/test
+    username: root
+    password: 123456
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    database: MYSQL
+    openInView: true
+    show_sql: true
+    generate-ddl: true #(false)
+    hibernate:
+        ddl-auto: update #(none)

@@ -11,79 +11,100 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.security.RolesAllowed;
 
-/**
- * 测试接口
- */
 @RestController
 @RequestMapping("/authenticated")
-@Api("测试用户权限")
+@Api(value = "AccessToken测试接口",tags = "测试用户权限，请使用从oauth2-server获取到的Access Token加在swagger2头信息中,Authorization=Bear " +
+        "AccessTokenValue")
 public class AuthenticatedController {
 
-    @ApiOperation(value = "@RolesAllowed注解测试", notes = "实现的getAuthoritie里面的role都必须要有ROLE_前缀")
-    @RolesAllowed({"MEMBER", "ROLE_MEMBER"})
+    /**
+     * 【@RolesAllowed】注解权限控制：ROLE_MEMBER 访问该接口
+     **/
+    @ApiOperation(value = "@RolesAllowed 注解测试 ROLE_MEMBER 权限",
+            notes = "需开启注解：@EnableGlobalMethodSecurity" +"(jsr250Enabled=true)")
+    @RolesAllowed({"ROLE_MEMBER"})
     @GetMapping("/roleAllowed/member")
     public String roleMemberRolesAllowed() {
         return "success";
     }
 
-    @ApiOperation(value = "@RolesAllowed注解测试", notes = "实现的getAuthoritie里面的role都必须要有ROLE_前缀")
-    @RolesAllowed({"ADMIN", "ROLE_ADMIN"})
+    @ApiOperation(value = "@RolesAllowed 注解测试 ROLE_ADMIN 权限",
+            notes = "需开启注解：@EnableGlobalMethodSecurity(jsr250Enabled=true)")
+    @RolesAllowed({"ROLE_ADMIN"})
     @GetMapping("/roleAllowed/admin")
     public String roleAdminRolesAllowed() {
         return "success";
     }
 
-    @Secured({"MEMBER", "ROLE_MEMBER"})
+    /**
+     * 【@Secured】注解权限控制：ROLE_MEMBER访问该接口
+     **/
+    @ApiOperation(value = "@Secured 注解测试 ROLE_MEMBER 权限",
+            notes = "需开启注解： @EnableGlobalMethodSecurity(securedEnabled =true) 且 @Secured对应的角色必须要有ROLE_前缀!")
+    @Secured({"ROLE_MEMBER"})
     @GetMapping("/secured/member")
     public String roleMember() {
         return "success";
     }
 
-
-    @Secured({"ADMIN", "ROLE_ADMIN"})
+    /**
+     * 【@Secured】注解权限控制：ROLE_ADMIN 访问该接口
+     **/
+    @ApiOperation(value = "@Secured 注解测试 ROLE_MEMBER 权限",
+            notes = "需开启注解： @EnableGlobalMethodSecurity(securedEnabled =true) 且 @Secured对应的角色必须要有ROLE_前缀!")
+    @Secured({"ROLE_ADMIN"})
     @GetMapping("/secured/admin")
     public String roleAdmin() {
         return "success";
     }
 
+
     /**
-     * 调用接口，修改用户数据。
-     *  条件:认证成功后，再检测 Access Token 所属用户与要修改的用户名是否相同
-     * @param username
-     * @return
-     */
+     * 【@PreAuthorize】注解权限控制：自定义方法控制权限
+     **/
+    @ApiOperation(value = "@PreAuthorize 自定义方法控制权限",
+            notes = "需开启注解： @EnableGlobalMethodSecurity(prePostEnabled =true) ")
     @PreAuthorize("@webSecurity.checkUserId(authentication,#username)")
     @GetMapping("/scope/read/{username}")
-    public String read(@PathVariable String username) {
+    public String scopeRead(@PathVariable String username) {
         return "success";
     }
 
+    @ApiOperation(value = "@PreAuthorize 根据【oauth_client_details】表记录的scope范围进行权限控制",
+            notes = "需开启注解：@EnableGlobalMethodSecurity" + "(prePostEnabled = true) ")
+    @PreAuthorize("#oauth2.hasScope('read')")
+    @GetMapping("/scope/read")
+    public String scopeRead() {
+        return "success";
+    }
     /**
      * 调用接口所需条件: 拥有scope：write
+     *
      * @return
      */
+    @ApiOperation(value = "@PreAuthorize 根据【oauth_client_details】表记录的scope范围进行权限控制", notes = "需开启注解： " +
+            "@EnableGlobalMethodSecurity" + "(prePostEnabled = true) ")
     @PreAuthorize("#oauth2.hasScope('write')")
     @GetMapping("/scope/write")
-    public String write() {
+    public String scopeWrite() {
         return "success";
     }
 
-    /**
-     * 调用接口所需角色：MEMBER
-     * @return
-     */
-    @PreAuthorize("#oauth2.clientHasAnyRole('MEMBER')")
+
+    @ApiOperation(value = "@PreAuthorize 使用spring-security-oauth2的注解控制权限", notes = "需开启注解： " +
+            "@EnableGlobalMethodSecurity" + "(prePostEnabled =  true) ")
+    @PreAuthorize("#oauth2.clientHasAnyRole('ROLE_MEMBER')")
     @GetMapping("/authorities/member")
-    public String member() {
+    public String authoritiesMember() {
         return "success";
     }
-    /**
-     * 调用接口所需角色：ADMIN
-     * @return
-     */
-    @PreAuthorize("#oauth2.clientHasAnyRole('ADMIN')")
+
+
+    @ApiOperation(value = "@PreAuthorize 使用spring-security-oauth2的注解控制权限",
+            notes = "需开启注解： @EnableGlobalMethodSecurity(prePostEnabled = true) ")
+    @PreAuthorize("#oauth2.clientHasAnyRole('ROLE_ADMIN')")
     @GetMapping("/authorities/admin")
-    public String admin() {
+    public String authoritiesAdmin() {
         return "success";
     }
 }

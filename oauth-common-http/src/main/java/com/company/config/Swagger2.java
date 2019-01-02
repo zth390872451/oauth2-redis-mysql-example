@@ -64,7 +64,7 @@ public class Swagger2 {
 	}
 
 	List<SecurityReference> defaultAuth() {
-		AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
+		AuthorizationScope authorizationScope = new AuthorizationScope("global", "存放Access Token");
 		AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
 		authorizationScopes[0] = authorizationScope;
 		return newArrayList(

@@ -1,0 +1,611 @@
+{
+	"id": "37bad6d9-e347-b4ec-8c2f-e5b210e354a2",
+	"name": "oauth2",
+	"description": "",
+	"order": [],
+	"folders": [
+		{
+			"name": "oauth2-resource",
+			"description": "",
+			"collectionId": "37bad6d9-e347-b4ec-8c2f-e5b210e354a2",
+			"order": [
+				"a0400f1d-ad27-d1cc-1b84-ed12e68ea01c",
+				"2dd91e93-1908-2146-01bf-2706a7924f7b",
+				"a43ad464-ddee-1ad0-ca29-43e117ec29db"
+			],
+			"owner": "118886",
+			"folders_order": [],
+			"id": "d509f09f-1f24-4e51-d7d6-aa1746810222"
+		},
+		{
+			"name": "oauth2-server",
+			"description": "",
+			"collectionId": "37bad6d9-e347-b4ec-8c2f-e5b210e354a2",
+			"order": [
+				"b6f269b1-0233-2287-4c57-33a5d8b1020d",
+				"83ee4087-1437-f47f-5bba-ad1701502c8f"
+			],
+			"owner": "118886",
+			"folders_order": [],
+			"id": "431eae46-9875-dbc3-c6ef-aeec7db1721b"
+		}
+	],
+	"folders_order": [
+		"431eae46-9875-dbc3-c6ef-aeec7db1721b",
+		"d509f09f-1f24-4e51-d7d6-aa1746810222"
+	],
+	"timestamp": 1543473146107,
+	"owner": "118886",
+	"public": false,
+	"requests": [
+		{
+			"id": "2dd91e93-1908-2146-01bf-2706a7924f7b",
+			"headers": "Authorization: Bearer 5324444f-f64c-45a2-87ad-0ca8deafc652\n",
+			"headerData": [
+				{
+					"key": "",
+					"value": "",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "Bearer 5324444f-f64c-45a2-87ad-0ca8deafc652",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8051/oauth2-client/api/test3",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "37bad6d9-e347-b4ec-8c2f-e5b210e354a2",
+			"data": null,
+			"dataMode": "params",
+			"name": "ROLE_MEMBER权限访问接口",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1546079610170,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"isFromCollection": true,
+			"collectionRequestId": "2dd91e93-1908-2146-01bf-2706a7924f7b",
+			"folder": "d509f09f-1f24-4e51-d7d6-aa1746810222"
+		},
+		{
+			"id": "83ee4087-1437-f47f-5bba-ad1701502c8f",
+			"headers": "Authorization: Basic cGFzc3dvcmRfYXV0aF9tb2RlOjEyMzQ1Ng==\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Basic cGFzc3dvcmRfYXV0aF9tb2RlOjEyMzQ1Ng==",
+					"description": "Basic+空格+Base64(clientId:clientSecret)",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8050/oauth/token?username=username&password=e10adc3949ba59abbe56e057f20f883e&grant_type=password",
+			"folder": "431eae46-9875-dbc3-c6ef-aeec7db1721b",
+			"queryParams": [
+				{
+					"key": "username",
+					"value": "username",
+					"equals": true,
+					"description": "用户名",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "e10adc3949ba59abbe56e057f20f883e",
+					"equals": true,
+					"description": "密码明文为123456",
+					"enabled": true
+				},
+				{
+					"key": "grant_type",
+					"value": "password",
+					"equals": true,
+					"description": "OAuth2的认证模式",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1546348278436,
+			"name": "直接-密码模式获取AccessToken请求",
+			"description": "",
+			"collectionId": "37bad6d9-e347-b4ec-8c2f-e5b210e354a2",
+			"responses": [
+				{
+					"status": "",
+					"responseCode": {
+						"code": 200,
+						"name": "OK"
+					},
+					"time": 393,
+					"headers": [
+						{
+							"name": "cache-control",
+							"key": "cache-control",
+							"value": "no-store",
+							"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json;charset=UTF-8",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Tue, 01 Jan 2019 12:51:54 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "pragma",
+							"key": "pragma",
+							"value": "no-cache",
+							"description": "Implementation-specific headers that may have various effects anywhere along the request-response chain."
+						},
+						{
+							"name": "transfer-encoding",
+							"key": "transfer-encoding",
+							"value": "chunked",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						},
+						{
+							"name": "x-content-type-options",
+							"key": "x-content-type-options",
+							"value": "nosniff",
+							"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+						},
+						{
+							"name": "x-frame-options",
+							"key": "x-frame-options",
+							"value": "DENY",
+							"description": "Clickjacking protection: \"deny\" - no rendering within a frame, \"sameorigin\" - no rendering if origin mismatch"
+						},
+						{
+							"name": "x-xss-protection",
+							"key": "x-xss-protection",
+							"value": "1; mode=block",
+							"description": "Cross-site scripting (XSS) filter"
+						}
+					],
+					"cookies": [
+						{
+							"domain": "localhost",
+							"expirationDate": 1605835382,
+							"hostOnly": true,
+							"httpOnly": false,
+							"name": "_ga",
+							"path": "/",
+							"sameSite": "no_restriction",
+							"secure": false,
+							"session": false,
+							"storeId": "0",
+							"value": "GA1.1.1382314286.1533714139"
+						}
+					],
+					"mime": "",
+					"text": "{\"access_token\":\"141d662b-57ea-464d-a287-40557a7a47a9\",\"token_type\":\"bearer\",\"refresh_token\":\"c43b18f8-e0ea-4a1e-a5b9-1e26f0b4b1f2\",\"expires_in\":2591999,\"scope\":\"read\"}",
+					"language": "json",
+					"rawDataType": "text",
+					"previewType": "text",
+					"searchResultScrolledTo": -1,
+					"forceNoPretty": false,
+					"write": true,
+					"empty": false,
+					"failed": false,
+					"id": "bad1901a-dafd-c485-bdf2-23e7f7e80c4b",
+					"name": "直接-密码模式获取AccessToken请求-Success",
+					"isSample": true,
+					"scrollToResult": false,
+					"runTests": false,
+					"request": {
+						"url": "http://localhost:8050/oauth/token?username=username&password=e10adc3949ba59abbe56e057f20f883e&grant_type=password",
+						"pathVariables": {},
+						"pathVariableData": [],
+						"queryParams": [
+							{
+								"key": "username",
+								"value": "username",
+								"equals": true,
+								"description": "用户名",
+								"enabled": true
+							},
+							{
+								"key": "password",
+								"value": "e10adc3949ba59abbe56e057f20f883e",
+								"equals": true,
+								"description": "密码明文为123456",
+								"enabled": true
+							},
+							{
+								"key": "grant_type",
+								"value": "password",
+								"equals": true,
+								"description": "OAuth2的认证模式",
+								"enabled": true
+							}
+						],
+						"headerData": [
+							{
+								"key": "Authorization",
+								"value": "Basic cGFzc3dvcmRfYXV0aF9tb2RlOjEyMzQ1Ng==",
+								"description": "Basic+空格+Base64(clientId:clientSecret)",
+								"enabled": true,
+								"warning": ""
+							}
+						],
+						"headers": "Authorization: Basic cGFzc3dvcmRfYXV0aF9tb2RlOjEyMzQ1Ng==\n",
+						"data": null,
+						"method": "POST",
+						"dataMode": "params"
+					}
+				}
+			],
+			"isFromCollection": true,
+			"collectionRequestId": "83ee4087-1437-f47f-5bba-ad1701502c8f"
+		},
+		{
+			"id": "a0400f1d-ad27-d1cc-1b84-ed12e68ea01c",
+			"headers": "Authorization: Bearer 5324444f-f64c-45a2-87ad-0ca8deafc652\n",
+			"headerData": [
+				{
+					"key": "",
+					"value": "",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "Bearer 5324444f-f64c-45a2-87ad-0ca8deafc652",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8051/oauth2-client/api/test3",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "37bad6d9-e347-b4ec-8c2f-e5b210e354a2",
+			"data": null,
+			"dataMode": "params",
+			"name": "test",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1546079610170,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"isFromCollection": true,
+			"collectionRequestId": "a0400f1d-ad27-d1cc-1b84-ed12e68ea01c",
+			"folder": "d509f09f-1f24-4e51-d7d6-aa1746810222"
+		},
+		{
+			"id": "a43ad464-ddee-1ad0-ca29-43e117ec29db",
+			"headers": "Authorization: Bearer 141d662b-57ea-464d-a287-40557a7a47a9\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer 141d662b-57ea-464d-a287-40557a7a47a9",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8051/authenticated/authorities/member",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "37bad6d9-e347-b4ec-8c2f-e5b210e354a2",
+			"data": null,
+			"dataMode": "params",
+			"name": "ROLE_MEMBER权限访问接口",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1546393881297,
+			"version": 2,
+			"responses": [
+				{
+					"status": "",
+					"responseCode": {
+						"code": 200,
+						"name": "OK",
+						"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+					},
+					"time": 5063,
+					"headers": [
+						{
+							"name": "cache-control",
+							"key": "cache-control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate",
+							"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+						},
+						{
+							"name": "content-length",
+							"key": "content-length",
+							"value": "7",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "text/plain;charset=ISO-8859-1",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Wed, 02 Jan 2019 01:50:35 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "expires",
+							"key": "expires",
+							"value": "0",
+							"description": "Gives the date/time after which the response is considered stale"
+						},
+						{
+							"name": "pragma",
+							"key": "pragma",
+							"value": "no-cache",
+							"description": "Implementation-specific headers that may have various effects anywhere along the request-response chain."
+						},
+						{
+							"name": "x-content-type-options",
+							"key": "x-content-type-options",
+							"value": "nosniff",
+							"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+						},
+						{
+							"name": "x-frame-options",
+							"key": "x-frame-options",
+							"value": "DENY",
+							"description": "Clickjacking protection: \"deny\" - no rendering within a frame, \"sameorigin\" - no rendering if origin mismatch"
+						},
+						{
+							"name": "x-xss-protection",
+							"key": "x-xss-protection",
+							"value": "1; mode=block",
+							"description": "Cross-site scripting (XSS) filter"
+						}
+					],
+					"cookies": [
+						{
+							"domain": "localhost",
+							"expirationDate": 1605835382,
+							"hostOnly": true,
+							"httpOnly": false,
+							"name": "_ga",
+							"path": "/",
+							"sameSite": "no_restriction",
+							"secure": false,
+							"session": false,
+							"storeId": "0",
+							"value": "GA1.1.1382314286.1533714139"
+						},
+						{
+							"domain": "localhost",
+							"hostOnly": true,
+							"httpOnly": true,
+							"name": "JSESSIONID",
+							"path": "/",
+							"sameSite": "no_restriction",
+							"secure": false,
+							"session": true,
+							"storeId": "0",
+							"value": "1A680BC3823B443637CC2CC678352A08"
+						}
+					],
+					"mime": "",
+					"text": "success",
+					"language": "plainText",
+					"rawDataType": "text",
+					"previewType": "text",
+					"searchResultScrolledTo": -1,
+					"forceNoPretty": false,
+					"write": true,
+					"empty": false,
+					"failed": false,
+					"name": "ROLE_MEMBER权限访问接口",
+					"id": "f781321d-78dd-8f5e-3aed-5f0eecf42875",
+					"request": {
+						"url": "http://localhost:8051/authenticated/authorities/member",
+						"pathVariables": {},
+						"pathVariableData": [],
+						"queryParams": [],
+						"headerData": [
+							{
+								"key": "Authorization",
+								"value": "Bearer 141d662b-57ea-464d-a287-40557a7a47a9",
+								"description": "",
+								"enabled": true,
+								"warning": ""
+							}
+						],
+						"headers": "Authorization: Bearer 141d662b-57ea-464d-a287-40557a7a47a9\n",
+						"data": null,
+						"method": "GET",
+						"dataMode": "params"
+					}
+				}
+			],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"folder": "d509f09f-1f24-4e51-d7d6-aa1746810222"
+		},
+		{
+			"id": "b6f269b1-0233-2287-4c57-33a5d8b1020d",
+			"headers": "Authorization: Basic Y2xpZW50X2F1dGhfbW9kZToxMjM0NTY=\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Basic Y2xpZW50X2F1dGhfbW9kZToxMjM0NTY=",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8050/oauth/token?grant_type=client_credentials",
+			"queryParams": [
+				{
+					"key": "grant_type",
+					"value": "client_credentials",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1546393228205,
+			"name": "直接-客户端授权模式获取AccessToken请求",
+			"description": "",
+			"collectionId": "37bad6d9-e347-b4ec-8c2f-e5b210e354a2",
+			"responses": [
+				{
+					"status": "",
+					"responseCode": {
+						"code": 200,
+						"name": "OK",
+						"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+					},
+					"time": 3524,
+					"headers": [
+						{
+							"name": "cache-control",
+							"key": "cache-control",
+							"value": "no-store",
+							"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json;charset=UTF-8",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Wed, 02 Jan 2019 01:40:20 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "pragma",
+							"key": "pragma",
+							"value": "no-cache",
+							"description": "Implementation-specific headers that may have various effects anywhere along the request-response chain."
+						},
+						{
+							"name": "transfer-encoding",
+							"key": "transfer-encoding",
+							"value": "chunked",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						},
+						{
+							"name": "x-content-type-options",
+							"key": "x-content-type-options",
+							"value": "nosniff",
+							"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+						},
+						{
+							"name": "x-frame-options",
+							"key": "x-frame-options",
+							"value": "DENY",
+							"description": "Clickjacking protection: \"deny\" - no rendering within a frame, \"sameorigin\" - no rendering if origin mismatch"
+						},
+						{
+							"name": "x-xss-protection",
+							"key": "x-xss-protection",
+							"value": "1; mode=block",
+							"description": "Cross-site scripting (XSS) filter"
+						}
+					],
+					"cookies": [
+						{
+							"domain": "localhost",
+							"expirationDate": 1605835382,
+							"hostOnly": true,
+							"httpOnly": false,
+							"name": "_ga",
+							"path": "/",
+							"sameSite": "no_restriction",
+							"secure": false,
+							"session": false,
+							"storeId": "0",
+							"value": "GA1.1.1382314286.1533714139"
+						}
+					],
+					"mime": "",
+					"text": "{\"access_token\":\"a6d71db4-14e8-4823-a66c-5dcd68ddf77d\",\"token_type\":\"bearer\",\"expires_in\":2547175,\"scope\":\"read write\"}",
+					"language": "json",
+					"rawDataType": "text",
+					"previewType": "text",
+					"searchResultScrolledTo": -1,
+					"forceNoPretty": false,
+					"write": true,
+					"empty": false,
+					"failed": false,
+					"name": "直接-客户端授权模式获取AccessToken请求",
+					"id": "daee4c72-b5fc-ccac-e2d2-fb42abef6b1a",
+					"request": {
+						"url": "http://localhost:8050/oauth/token?grant_type=client_credentials",
+						"pathVariables": {},
+						"pathVariableData": [],
+						"queryParams": [
+							{
+								"key": "grant_type",
+								"value": "client_credentials",
+								"equals": true,
+								"description": "",
+								"enabled": true
+							}
+						],
+						"headerData": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"name": "Authorization",
+								"value": "Basic Y2xpZW50X2F1dGhfbW9kZToxMjM0NTY=",
+								"description": "",
+								"enabled": true
+							}
+						],
+						"headers": "Authorization: Basic Y2xpZW50X2F1dGhfbW9kZToxMjM0NTY=\n",
+						"data": null,
+						"method": "POST",
+						"dataMode": "params"
+					}
+				}
+			]
+		}
+	]
+}

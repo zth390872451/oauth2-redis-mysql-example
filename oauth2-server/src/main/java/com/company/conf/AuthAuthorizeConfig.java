@@ -4,24 +4,33 @@ import com.company.service.CustomUserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.approval.ApprovalStore;
 import org.springframework.security.oauth2.provider.approval.JdbcApprovalStore;
 import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
+import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
+import org.springframework.security.oauth2.provider.token.TokenEnhancer;
+import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 import javax.sql.DataSource;
+import java.util.Arrays;
 
 @Configuration
 /**
  * @Author: zheng.th
  * @Date: 2018/11/22 13:48
  */
+@EnableAuthorizationServer //创建Oauth2的认证授权服务器——provider，并开启认证授权服务器的相关默认配置
 public class AuthAuthorizeConfig extends AuthorizationServerConfigurerAdapter {
 
 	@Autowired
@@ -48,7 +57,26 @@ public class AuthAuthorizeConfig extends AuthorizationServerConfigurerAdapter {
 		clients.jdbc(dataSource);
 	}
 
+	@Bean
+	public TokenStore tokenStore() {
+		return new JwtTokenStore(accessTokenConverter());
+	}
 
+	@Bean
+	public JwtAccessTokenConverter accessTokenConverter() {
+		JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+		converter.setSigningKey("123");
+		return converter;
+	}
+
+	@Bean
+	@Primary
+	public DefaultTokenServices tokenServices() {
+		DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
+		defaultTokenServices.setTokenStore(tokenStore());
+		defaultTokenServices.setSupportRefreshToken(true);
+		return defaultTokenServices;
+	}
 	/**
 	 * 密码模式下配置认证管理器 AuthenticationManager,并且设置 AccessToken的存储介质tokenStore,如果不设置，则会默认使用内存当做存储介质。
 	 * 而该AuthenticationManager将会注入 2个Bean对象用以检查(认证)
@@ -56,11 +84,26 @@ public class AuthAuthorizeConfig extends AuthorizationServerConfigurerAdapter {
 	 * 2、UserDetailsService的实现类 CustomUserDetailsService (检查 UserDetails 对象)
 	 *
      */
+/*	@Override
+	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+		endpoints.approvalStore(approvalStore()).tokenStore(tokenStore())
+				.accessTokenConverter(accessTokenConverter())
+				.authenticationManager(authenticationManager)*//*.userDetailsService(userDetailsService)*//*;
+	}*/
+
 	@Override
-	public void configure(AuthorizationServerEndpointsConfigurer endpoints)
-			throws Exception {
-		endpoints.approvalStore(approvalStore()).authenticationManager(authenticationManager)
-				.tokenStore(tokenStore).userDetailsService(userDetailsService);
+	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+		TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
+		tokenEnhancerChain.setTokenEnhancers(
+				Arrays.asList(tokenEnhancer(), accessTokenConverter()));
+		endpoints.tokenStore(tokenStore())
+				.tokenEnhancer(tokenEnhancerChain)
+				.authenticationManager(authenticationManager);
+	}
+
+	@Bean
+	public TokenEnhancer tokenEnhancer() {
+		return new CustomTokenEnhancer();
 	}
 
 	/**

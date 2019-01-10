@@ -6,13 +6,18 @@ package com.company.config;
  */
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 
 @Configuration
@@ -22,9 +27,6 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
     @Value(value = "${oauth2.resource.id}")
    private String oauth2ResourceId;
 
-    @Autowired
-    private TokenStore tokenStore;
-
     /**
      * 资源服务器认证的配置：
      * 1、设置资源服务器的标识，从配置文件中读取自定义资源名称
@@ -33,7 +35,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
      */
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) {
-        resources.resourceId(oauth2ResourceId).tokenStore(tokenStore);
+        resources.resourceId(oauth2ResourceId).tokenStore(tokenStore());
     }
 
     @Override
@@ -46,6 +48,26 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                 .and()
                 //配置访问权限控制，/api/** 路径,必须认证过后才可以访问
                 .authorizeRequests().antMatchers("/authenticated/**").authenticated();
-
     }
+
+    @Bean
+    public TokenStore tokenStore() {
+        return new JwtTokenStore(accessTokenConverter());
+    }
+
+    @Bean
+    public JwtAccessTokenConverter accessTokenConverter() {
+        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+        converter.setSigningKey("123");
+        return converter;
+    }
+
+    @Bean
+    @Primary
+    public DefaultTokenServices tokenServices() {
+        DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
+        defaultTokenServices.setTokenStore(tokenStore());
+        return defaultTokenServices;
+    }
+
 }

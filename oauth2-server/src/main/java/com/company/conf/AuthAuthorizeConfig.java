@@ -8,20 +8,23 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.approval.ApprovalStore;
 import org.springframework.security.oauth2.provider.approval.JdbcApprovalStore;
+import org.springframework.security.oauth2.provider.approval.TokenApprovalStore;
 import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 
 import javax.sql.DataSource;
 
-@Configuration
 /**
  * @Author: zheng.th
  * @Date: 2018/11/22 13:48
  */
+@Configuration
+@EnableAuthorizationServer //创建Oauth2的认证授权服务器——provider，并开启认证授权服务器的相关默认配置
 public class AuthAuthorizeConfig extends AuthorizationServerConfigurerAdapter {
 
 	@Autowired
@@ -33,10 +36,7 @@ public class AuthAuthorizeConfig extends AuthorizationServerConfigurerAdapter {
 	@Autowired
 	private CustomUserDetailsServiceImpl userDetailsService;
 
-	@Bean
-	public ApprovalStore approvalStore() {
-		return new JdbcApprovalStore(dataSource);
-	}
+
 
 	/**
 	 * 配置 oauth_client_details【client_id和client_secret等】信息的认证【检查ClientDetails的合法性】服务
@@ -59,7 +59,7 @@ public class AuthAuthorizeConfig extends AuthorizationServerConfigurerAdapter {
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints)
 			throws Exception {
-		endpoints.approvalStore(approvalStore()).authenticationManager(authenticationManager)
+		endpoints.authenticationManager(authenticationManager)
 				.tokenStore(tokenStore).userDetailsService(userDetailsService);
 	}
 

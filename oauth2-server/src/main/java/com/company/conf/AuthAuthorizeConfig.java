@@ -15,7 +15,9 @@ import org.springframework.security.oauth2.provider.approval.ApprovalStore;
 import org.springframework.security.oauth2.provider.approval.JdbcApprovalStore;
 import org.springframework.security.oauth2.provider.approval.TokenApprovalStore;
 import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
+import org.springframework.security.oauth2.provider.token.AccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
 import javax.sql.DataSource;
 
@@ -35,8 +37,8 @@ public class AuthAuthorizeConfig extends AuthorizationServerConfigurerAdapter {
 	private TokenStore tokenStore;
 	@Autowired
 	private CustomUserDetailsServiceImpl userDetailsService;
-
-
+	@Autowired
+	private AccessTokenConverter accessTokenConverter;
 
 	/**
 	 * 配置 oauth_client_details【client_id和client_secret等】信息的认证【检查ClientDetails的合法性】服务
@@ -47,7 +49,6 @@ public class AuthAuthorizeConfig extends AuthorizationServerConfigurerAdapter {
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 		clients.jdbc(dataSource);
 	}
-
 
 	/**
 	 * 密码模式下配置认证管理器 AuthenticationManager,并且设置 AccessToken的存储介质tokenStore,如果不设置，则会默认使用内存当做存储介质。
@@ -60,6 +61,7 @@ public class AuthAuthorizeConfig extends AuthorizationServerConfigurerAdapter {
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints)
 			throws Exception {
 		endpoints.authenticationManager(authenticationManager)
+				.accessTokenConverter(accessTokenConverter)
 				.tokenStore(tokenStore).userDetailsService(userDetailsService);
 	}
 

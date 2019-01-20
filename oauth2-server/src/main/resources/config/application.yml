@@ -3,6 +3,7 @@ security:
         enabled: false # 是否开启基本的鉴权，默认为true。 true：所有的接口默认都需要被验证，将导致 拦截器[对于 excludePathPatterns()方法失效]
 server:
   port: 8050
+  context-path: /oauth2-server
 ---
 spring:
   application:
@@ -28,4 +29,8 @@ spring:
     show_sql: true
     generate-ddl: true #(false)
     hibernate:
-        ddl-auto: update #(none)
+        ddl-auto: update
+#  thymeleaf:
+#    cache: false #实现热部署
+#    mode: LEGACYHTML5 #回避HTML进行严格的检查的配置，当然你需要提前引入nekohtml依赖
+debug: true

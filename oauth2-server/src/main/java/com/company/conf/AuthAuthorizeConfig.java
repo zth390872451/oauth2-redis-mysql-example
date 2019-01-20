@@ -11,13 +11,10 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
-import org.springframework.security.oauth2.provider.approval.ApprovalStore;
-import org.springframework.security.oauth2.provider.approval.JdbcApprovalStore;
-import org.springframework.security.oauth2.provider.approval.TokenApprovalStore;
-import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
+import org.springframework.security.oauth2.provider.code.AuthorizationCodeServices;
+import org.springframework.security.oauth2.provider.code.JdbcAuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.token.AccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
 import javax.sql.DataSource;
 
@@ -39,7 +36,8 @@ public class AuthAuthorizeConfig extends AuthorizationServerConfigurerAdapter {
 	private CustomUserDetailsServiceImpl userDetailsService;
 	@Autowired
 	private AccessTokenConverter accessTokenConverter;
-
+	@Autowired
+	private AuthorizationCodeServices authorizationCodeServices;
 	/**
 	 * 配置 oauth_client_details【client_id和client_secret等】信息的认证【检查ClientDetails的合法性】服务
 	 * 设置 认证信息的来源：数据库 (可选项：数据库和内存,使用内存一般用来作测试)
@@ -48,6 +46,11 @@ public class AuthAuthorizeConfig extends AuthorizationServerConfigurerAdapter {
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 		clients.jdbc(dataSource);
+	}
+
+	@Bean
+	public AuthorizationCodeServices authorizationCodeServices(DataSource dataSource) {
+		return new JdbcAuthorizationCodeServices(dataSource);
 	}
 
 	/**
@@ -62,6 +65,7 @@ public class AuthAuthorizeConfig extends AuthorizationServerConfigurerAdapter {
 			throws Exception {
 		endpoints.authenticationManager(authenticationManager)
 				.accessTokenConverter(accessTokenConverter)
+				.authorizationCodeServices(authorizationCodeServices)
 				.tokenStore(tokenStore).userDetailsService(userDetailsService);
 	}
 

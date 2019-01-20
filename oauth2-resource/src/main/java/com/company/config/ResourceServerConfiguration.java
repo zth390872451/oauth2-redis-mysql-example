@@ -44,10 +44,9 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                 .and()
                 //配置访问权限控制，/anonymous/** 路径,必须可以匿名访问
                 .anonymous()
-                .and().formLogin().loginPage("/login.html")
+//                .and().formLogin().loginPage("/login.html")
                 .and()
                 //配置访问权限控制，/api/** 路径,必须认证过后才可以访问
                 .authorizeRequests().antMatchers("/authenticated/**").authenticated();
-
     }
 }

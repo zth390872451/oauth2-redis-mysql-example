@@ -17,8 +17,13 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
-    public void configure(WebSecurity controller) throws Exception {
-        super.configure(controller);
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/css/**");
+        web.ignoring().antMatchers("/images/**");
+        web.ignoring().antMatchers("/js/**");
+//忽略登录界面
+        web.ignoring().antMatchers("/login");
+        web.ignoring().antMatchers("/thirdLogin");
     }
 
     @Override

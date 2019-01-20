@@ -1,4 +1,3 @@
-/*
 package com.company.controller;
 
 import com.company.dto.AppInfoDTO;
@@ -15,10 +14,10 @@ import org.springframework.security.oauth2.client.token.grant.password.ResourceO
 import org.springframework.security.oauth2.client.token.grant.password.ResourceOwnerPasswordResourceDetails;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.util.Assert;
-import org.springframework.controller.bind.annotation.PostMapping;
-import org.springframework.controller.bind.annotation.RequestBody;
-import org.springframework.controller.bind.annotation.RequestMapping;
-import org.springframework.controller.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
@@ -76,4 +75,4 @@ public class OAuth2Controller {
 		}
 		return accessToken;
 	}
-}*/
+}

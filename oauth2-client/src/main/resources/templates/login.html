@@ -34,13 +34,13 @@
     }
 
     function loadData() {
-        var code = getQueryString("code");
+       /* var code = getQueryString("code");
         //有code值，则提交给当前网站后台的登录接口
         if (code) {
             authrizeSuccessLogin(code);
         } else {
             console.log("no code!");
-        }
+        }*/
     }
 </script>
 <body onload="loadData()">
@@ -64,7 +64,8 @@
         </div>
         <br/>
         <button type="submit" style="width:190px;">登 录</button>
-        <a href="http://www.v5.cn:8080/spring-oauth-server/oauth/authorize?client_id=unity-client&redirect_uri=http://www.newbee.cn:8052/client/thirdLogin&response_type=code&scope=read"
+        <a
+                href="http://www.v5.cn:8050/oauth2-server/oauth/authorize?client_id=code_auth_mode&redirect_uri=http://www.newbee.cn:8052/oauth2-client/thirdLogin&response_type=code&scope=read"
            target="_self" name="QQ授权">QQ授权啊</a>
         <button type="submit" onclick="authrize()" style="width:190px;">QQ授权登录</button>
     </form>

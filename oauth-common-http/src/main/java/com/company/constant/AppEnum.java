@@ -2,7 +2,7 @@ package com.company.constant;
 
 public enum AppEnum {
 
-    WeChat_APP("WeChat","微信"),Alipay_APP("Alipay","支付宝");
+    WeChat("WeChat","微信"), Alipay("Alipay","支付宝"), QQ("QQ","QQ");
 
     private String appName;
     private String appDesc;

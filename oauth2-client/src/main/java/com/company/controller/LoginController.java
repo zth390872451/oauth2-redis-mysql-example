@@ -1,7 +1,15 @@
 package com.company.controller;
 
+import com.company.constant.AppEnum;
+import com.company.dto.AccessTokenDTO;
+import com.company.service.AppService;
+import com.company.utils.AppServiceFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  * @Author: zheng.th
@@ -11,22 +19,23 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/")
 public class LoginController {
 
-
     @GetMapping("/login")
-    public String login(){
-        return "login";
+    public ModelAndView login() {
+        return new ModelAndView("/login");
     }
 
-    @GetMapping("/")
-    public String index(){
-        return "/login";
+    @GetMapping("/index")
+    public String index() {
+        return "/index";
     }
 
     @RequestMapping("/thirdLogin/{appName}")
     @ResponseBody
-    public String thirdLogin(@PathVariable String appName, @RequestParam(name = "code") String code){
-
-        System.out.println("code = " + code);
-        return "login";
+    public AccessTokenDTO thirdLogin(@PathVariable String appName, @RequestParam(name = "code") String code){
+        AppService appService = AppServiceFactory.getAppService(AppEnum.valueOf(appName));
+        Assert.state(appService!=null,"暂不支持"+appName+"方式登录");
+        AccessTokenDTO accessToken = appService.getAccessToken(code);
+        Assert.state(accessToken!=null,"接口调用失败!");
+        return accessToken;
     }
 }

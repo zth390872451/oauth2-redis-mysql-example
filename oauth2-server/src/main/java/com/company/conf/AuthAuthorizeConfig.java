@@ -14,9 +14,13 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.provider.code.AuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.code.JdbcAuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.token.AccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.TokenEnhancer;
+import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
 import javax.sql.DataSource;
+import java.util.Arrays;
 
 /**
  * @Author: zheng.th
@@ -38,6 +42,9 @@ public class AuthAuthorizeConfig extends AuthorizationServerConfigurerAdapter {
 	private AccessTokenConverter accessTokenConverter;
 	@Autowired
 	private AuthorizationCodeServices authorizationCodeServices;
+	@Autowired
+	private JwtAccessTokenConverter jwtAccessTokenConverter;
+
 	/**
 	 * 配置 oauth_client_details【client_id和client_secret等】信息的认证【检查ClientDetails的合法性】服务
 	 * 设置 认证信息的来源：数据库 (可选项：数据库和内存,使用内存一般用来作测试)
@@ -63,8 +70,12 @@ public class AuthAuthorizeConfig extends AuthorizationServerConfigurerAdapter {
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints)
 			throws Exception {
+		// 自定义token生成方式
+		TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
+		tokenEnhancerChain.setTokenEnhancers(Arrays.asList(new CustomerAccessTokenConverter(), jwtAccessTokenConverter));
+		endpoints.tokenEnhancer(tokenEnhancerChain);
 		endpoints.authenticationManager(authenticationManager)
-				.accessTokenConverter(accessTokenConverter)
+				.accessTokenConverter(accessTokenConverter).tokenEnhancer(tokenEnhancerChain)
 				.authorizationCodeServices(authorizationCodeServices)
 				.tokenStore(tokenStore).userDetailsService(userDetailsService);
 	}

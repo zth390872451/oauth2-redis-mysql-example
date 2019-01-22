@@ -18,12 +18,12 @@ spring:
     suffix: .html
   mvc:
     static-path-pattern: /static/**
-
 token:
   obtain:
-    url: http://localhost:8050/oauth/token #oauth2-server 服务器地址 + oauth/token
+    url: http://localhost:8050/oauth2-server/oauth/token #oauth2-server 服务器地址 + oauth/token
 swagger2:
   base-package: com.company.controller
   api-title: 接口测试
   version: 0.1.0
 debug: true
+

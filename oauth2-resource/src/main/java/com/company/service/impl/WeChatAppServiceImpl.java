@@ -17,7 +17,7 @@ public class WeChatAppServiceImpl implements AppService {
 
     @Override
     public AppEnum getAppName() {
-        return AppEnum.WeChat_APP;
+        return AppEnum.WeChat;
     }
 
     @Override

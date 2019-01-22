@@ -17,6 +17,7 @@ public class Member implements Serializable{
 	private Long id;
 	private String username;
 	private String password;
+	private String salt;
 
 	public Member(Member member){
 		super();
@@ -26,6 +27,14 @@ public class Member implements Serializable{
 	
 	public Member() {
 
+	}
+
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
 	}
 
 	public String getUsername() {

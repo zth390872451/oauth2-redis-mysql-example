@@ -17,7 +17,7 @@ public class AliPayAppServiceImpl implements AppService {
 
     @Override
     public AppEnum getAppName() {
-        return AppEnum.Alipay_APP;
+        return AppEnum.Alipay;
     }
 
     @Override

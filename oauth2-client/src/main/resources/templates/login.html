@@ -6,55 +6,12 @@
 </head>
 <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"/>
 <script>
-    var authorizeUrl = "http://www.v5.cn:8080/spring-oauth-server/oauth/authorize";
-    var loginUrl = "http://www.newbee.cn:8052/client/thirdLogin";
-    var redirectUrlEncode = encodeURI(loginUrl);
-    var clientId = "unity-client";
-    var url = authorizeUrl + "?client_id=" + clientId + "&redirect_uri=" + redirectUrlEncode + "&response_type=code&scope=read";
 
-    function getQueryString(name) {
-        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-        var r = window.location.search.substr(1).match(reg);
-        if (r != null) return unescape(r[2]);
-        return null;
-    }
-
-    function authrizeSuccessLogin(code) {
-        var loginData = {
-            code: code
-        }
-        $.ajax({
-            type: "POST",
-            url: loginUrl,
-            dataType: 'json',
-            data: JSON.stringify(loginData),
-            success: function (data) {
-                console.log(data);
-            }
-        });
-    }
-
-    function loadData() {
-        /* var code = getQueryString("code");
-         //有code值，则提交给当前网站后台的登录接口
-         if (code) {
-             authrizeSuccessLogin(code);
-         } else {
-             console.log("no code!");
-         }*/
-    }
 </script>
-<body onload="loadData()">
-<h2>用户列表</h2>
+<body>
+<h2>用户登录</h2>
 <div>
-    <a
-            href="http://www.v5.cn:8050/oauth2-server/oauth/authorize?client_id=code_auth_mode&redirect_uri=http://www.newbee.cn:8052/oauth2-client/thirdLogin/QQ&response_type=code&scope=read"
-            target="_self">测试授权登录/a>
-        <br>
-        <a
-                href="http://www.v5.cn:8050/oauth2-server/oauth/authorize?client_id=qq_client_id&redirect_uri=http://www.newbee.cn:8052/oauth2-client/thirdLogin/QQ&response_type=code&scope=read"
-                target="_self">QQ授权登录/a>
-            <br>
+
             <a
                     href="http://www.v5.cn:8050/oauth2-server/oauth/authorize?client_id=wechat_client_id&redirect_uri=http://www.newbee.cn:8052/oauth2-client/thirdLogin/WeChat&response_type=code&scope=read"
                     target="_self">微信授权登录</a>

@@ -6,24 +6,9 @@
 </head>
 <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"/>
 <script>
-     function getQueryString(name) {
-        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-        var r = window.location.search.substr(1).match(reg);
-        if (r != null) return unescape(r[2]);
-        return null;
-    }
 
-    function loadData() {
-        var code = getQueryString("code");
-        //有code值，则提交给当前网站后台的登录接口
-        if (code) {
-            authrizeSuccessLogin(code);
-        } else {
-            console.log("no code!");
-        }
-    }
 </script>
-<body onload="loadData()">
+<body>
 <h2>用户列表</h2>
 <div>
 登陆成功！

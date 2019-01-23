@@ -55,3 +55,4 @@ CREATE TABLE `oauth_client_details` (
 -- ----------------------------
 INSERT INTO `oauth_client_details` VALUES ('client_auth_mode', 'oauth2-resource', '$2a$10$TiQGOXIhO2eWFMcxlGY2Vu1MrEFr30gKv84q7j/lkJyRiZgh6DieG', 'read,write', 'client_credentials,refresh_token', null, 'ROLE_ADMIN', '2592000', null, null, null);
 INSERT INTO `oauth_client_details` VALUES ('password_auth_mode', 'oauth2-resource', '$2a$10$TiQGOXIhO2eWFMcxlGY2Vu1MrEFr30gKv84q7j/lkJyRiZgh6DieG', 'read', 'refresh_token,password', null, 'ROLE_MEMBER', '2592000', null, null, null);
+INSERT INTO `oauth_client_details` VALUES ('wechat_client_id', 'oauth2-resource', '$2a$10$TiQGOXIhO2eWFMcxlGY2Vu1MrEFr30gKv84q7j/lkJyRiZgh6DieG', 'read', 'authorization_code', 'http://www.newbee.cn:8052/oauth2-client/thirdLogin/WeChat', 'ROLE_MEMBER', '600', '0', NULL, 'false');

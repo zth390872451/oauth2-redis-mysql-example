@@ -1,16 +1,14 @@
-package com.company.newbee;
+package com.company;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
 @SpringBootApplication
-@EnableWebMvc
-public class ClientApplication {
+public class WebApplication {
     public static void main(String[] args) {
-        SpringApplication.run(ClientApplication.class, args);
+        SpringApplication.run(WebApplication.class, args);
     }
 
 }

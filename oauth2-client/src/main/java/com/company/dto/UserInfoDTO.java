@@ -2,11 +2,15 @@ package com.company.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Builder;
+import lombok.Data;
 
 /**
  * @Author: zheng.th
  * @Date: 2019/1/1 21:29
  */
+@Data
+@Builder
 @ApiModel(description="密码模式，提交的信息")
 public class UserInfoDTO {
     @ApiModelProperty(value = "用户信息表【member】的用户名",required = true,example = "username",dataType = "String")
@@ -20,35 +24,4 @@ public class UserInfoDTO {
             "String")
     private String appSecret;
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getAppId() {
-        return appId;
-    }
-
-    public void setAppId(String appId) {
-        this.appId = appId;
-    }
-
-    public String getAppSecret() {
-        return appSecret;
-    }
-
-    public void setAppSecret(String appSecret) {
-        this.appSecret = appSecret;
-    }
 }

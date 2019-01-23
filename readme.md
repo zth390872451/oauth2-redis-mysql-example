@@ -23,8 +23,23 @@ OAuth2的客户端：oauth2-client，简称OC， 调用 spring-security-oauth2�
 3、第三方应用
 4、用户
 
-流程：
+授权码登录流程：
 1、用户进入网站的登录页面，选择第三方登录(如微信、QQ等)，
+2、进入登录页面A，选择微信登录。
+3、进入微信的登录授权页面。
+4、用户输入自己微信的账号和密码，点击确认，登录认证成功。
+5、进入授权页面，选择授权。
+6、调转至指定的url并携带code值
+7、后端接口处理code，调用对应的第三方接口，获取AccessToken成功后，继续获取用户信息，并自动注册成为Web的用户
+8、上一步骤成功后，进入Web主页。
 
-浏览器进入页面登录页面A，选择QQ登录。
-则进入QQ的登录授权页面，此时，用户输入自己QQ的账号和密码，点击确认，则进入
+用户密码登录流程：
+1、用户进入网站的登录页面
+2、输入用户名和密码
+3、封装用户名和密码，提交给授权服务器 oauth2-server 获取AccessToken
+4、成功，跳转到Web主页
+
+
+
+http://localhost:8052/oauth2-client/swagger-ui.html#/
+http://localhost:8051/oauth2-resouce/swagger-ui.html#/

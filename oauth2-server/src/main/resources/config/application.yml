@@ -30,7 +30,4 @@ spring:
     generate-ddl: true #(false)
     hibernate:
         ddl-auto: update
-#  thymeleaf:
-#    cache: false #实现热部署
-#    mode: LEGACYHTML5 #回避HTML进行严格的检查的配置，当然你需要提前引入nekohtml依赖
 debug: true

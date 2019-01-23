@@ -13,7 +13,6 @@
         <module>oauth2-client</module>
         <module>oauth2-server</module>
         <module>oauth-common-http</module>
-        <module>client</module>
     </modules>
 
     <parent>

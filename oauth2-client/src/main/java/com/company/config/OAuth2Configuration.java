@@ -4,6 +4,10 @@ package com.company.config;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.oauth2.client.OAuth2ClientContext;
+import org.springframework.security.oauth2.client.OAuth2RestOperations;
+import org.springframework.security.oauth2.client.OAuth2RestTemplate;
+import org.springframework.security.oauth2.client.filter.OAuth2ClientContextFilter;
 import org.springframework.security.oauth2.client.token.grant.client.ClientCredentialsAccessTokenProvider;
 import org.springframework.security.oauth2.client.token.grant.password.ResourceOwnerPasswordAccessTokenProvider;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
@@ -16,8 +20,8 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 
 @Configuration
 @EnableAutoConfiguration
-@EnableOAuth2Client //创建Oauth2的资源服务器——client，并开启资源服务器的相关默认配置
-public class OAuth2ClientConfiguration {
+public class OAuth2Configuration {
+
 
     @Bean
     public ClientCredentialsAccessTokenProvider ClientCredentialsAccessTokenProvider() {

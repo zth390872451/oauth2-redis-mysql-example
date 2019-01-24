@@ -70,7 +70,7 @@ public class AuthAuthorizeConfig extends AuthorizationServerConfigurerAdapter {
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints)
 			throws Exception {
-		// 自定义token生成方式
+		// 添加JWT的额外信息
 		TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
 		tokenEnhancerChain.setTokenEnhancers(Arrays.asList(new CustomerAccessTokenConverter(), jwtAccessTokenConverter));
 		endpoints.tokenEnhancer(tokenEnhancerChain);
@@ -90,6 +90,6 @@ public class AuthAuthorizeConfig extends AuthorizationServerConfigurerAdapter {
 	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
 		security.allowFormAuthenticationForClients();//允许客户表单认证
 		security.passwordEncoder(new BCryptPasswordEncoder());//设置oauth_client_details中的密码编码器
-		security.checkTokenAccess("permitAll()");//对于CheckEndpoint控制器[框架自带的校验]的/oauth/check端点允许所有客户端发送器请求而不会被Spring-security拦截
+		security.checkTokenAccess("permitAll()");
 	}
 }

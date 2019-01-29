@@ -23,12 +23,8 @@ public class WeChatAppServiceImpl implements AppService {
     }
 
     @Override
-    public AccessTokenDTO getAccessToken(String code) {
-        try {
+    public AccessTokenDTO getAccessToken(String code) throws Exception {
             return WeChatAPI.getAccessToken(code);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
+
     }
 }

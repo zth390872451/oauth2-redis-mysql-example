@@ -2,8 +2,10 @@ package com.company.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @Author: zheng.th
@@ -11,6 +13,8 @@ import lombok.Data;
  */
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @ApiModel(description="密码模式，提交的信息")
 public class UserInfoDTO {
     @ApiModelProperty(value = "用户信息表【member】的用户名",required = true,example = "username",dataType = "String")

@@ -26,6 +26,12 @@ public class WeChatAPI {
             "{0}?client_id={1}&client_secret={2}&grant_type" +
                     "=authorization_code&code={3}&redirect_uri={4}";
 
+    /**
+     * 模拟：利用微信的授权码授权获取访问凭证
+     * @param code
+     * @return
+     * @throws IOException
+     */
     public static AccessTokenDTO getAccessToken(String code) throws IOException {
         String url = MessageFormat.format(WECHAT_ACCESS_TOKEN_URL, ACCESS_TOKEN_URL, CLIENT_ID, CLIENT_SECRET, code, REDIRECT_URL);
         String result = Request.Post(url).execute().returnContent().asString();

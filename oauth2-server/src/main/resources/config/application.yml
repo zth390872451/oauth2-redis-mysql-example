@@ -8,16 +8,6 @@ server:
 spring:
   application:
       name: oauth2-server
-  redis:
-      database: 5
-      host: 127.0.0.1
-      port: 6379
-      pool:
-          max-active: 8
-          max-wait: 8
-          min-idle: 0
-          max-idle: 8
-
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/test
     username: root

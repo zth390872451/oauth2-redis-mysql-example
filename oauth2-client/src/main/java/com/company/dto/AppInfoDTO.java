@@ -2,6 +2,10 @@ package com.company.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.Valid;
 
@@ -9,6 +13,10 @@ import javax.validation.Valid;
  * @Author: zheng.th
  * @Date: 2019/1/1 21:29
  */
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @ApiModel(description="受信任的客户端模式，提交的信息")
 public class AppInfoDTO {
 
@@ -19,19 +27,4 @@ public class AppInfoDTO {
             "String")
     private String appSecret;
 
-    public String getAppId() {
-        return appId;
-    }
-
-    public void setAppId(String appId) {
-        this.appId = appId;
-    }
-
-    public String getAppSecret() {
-        return appSecret;
-    }
-
-    public void setAppSecret(String appSecret) {
-        this.appSecret = appSecret;
-    }
 }
